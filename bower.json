@@ -1,0 +1,22 @@
+{
+  "name": "react-hello-world",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Simon Olofsson <s.olofsson@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
+  }
+}
