@@ -38,13 +38,14 @@ class StickyNavbar extends React.Component {
 
     navbarPositionListener() {
 
+        let navbar = this.getNavbar();
         let elementToStickToY = this.offsetTop(this.props.elementToStickTo());
-        let topOfWindowAlignsWithTopOfNavbar = window.scrollY > (elementToStickToY - this.getNavbar().clientHeight);
+        let topOfWindowAlignsWithTopOfNavbar = window.scrollY > (elementToStickToY - navbar.clientHeight);
 
         if(topOfWindowAlignsWithTopOfNavbar) {
-            this.fixateElementPositionTop(this.getNavbar(), this.getNavbar.clientHeight);
+            this.fixateElementPositionTop(navbar, navbar.clientHeight);
         } else {
-            this.fixateElementPositionBottom(this.getNavbar(), elementToStickToY);
+            this.fixateElementPositionBottom(navbar, elementToStickToY);
         }
 
     }
@@ -73,15 +74,15 @@ class StickyNavbar extends React.Component {
 
     getHeadings() {
 
-        return this.props.headings.map((heading) =>
-            <li>{heading}</li>
+        return this.props.headings.map((heading, index) =>
+            <li key={index}>{heading}</li>
         );
     }
 
     getSocialMedia() {
 
-        return this.props.socialMedia.map((socialMediaItem) =>
-            <li>{socialMediaItem}</li>
+        return this.props.socialMedia.map((socialMediaItem, index) =>
+            <li key={index}>{socialMediaItem}</li>
         );
     }
 
