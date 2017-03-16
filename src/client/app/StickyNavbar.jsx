@@ -9,6 +9,7 @@ class StickyNavbar extends React.Component {
         this.fixatedAtElement = true;
 
         this.navbarPositionListener = this.navbarPositionListener.bind(this);
+        this.toggleNavbar = this.toggleNavbar.bind(this);
 
     }
 
@@ -65,6 +66,28 @@ class StickyNavbar extends React.Component {
 
     }
 
+    toggleNavbar() {
+
+        var navbarButton = this.navbarBtn;
+
+        if(this.navbar.hasClass('expanded')) {
+            element.removeClass('expanded');
+            element.css('height', String(collapsedNavbarHeight) + 'px');
+
+            checkNavbarLowerEdge();
+
+            navbarButton.removeClass('active');
+        } else {
+            element.addClass('expanded');
+            expandedNavbarHeight = $(element).children('.container-fluid').height();
+            element.css('height', String(expandedNavbarHeight) + 'px');
+
+            checkNavbarUpperEdge();
+
+            navbarButton.addClass('active');
+        }
+    }
+
     map(element, list) {
         return list.map((item, index) =>
             React.createElement(
@@ -90,7 +113,9 @@ class StickyNavbar extends React.Component {
                     <ul>{this.list(this.props.headings)}</ul>
 
                     <div id="social-media-section">{this.list(this.props.socialMedia)}</div>
-                    <button id="navbar-button" type="button" className="btn btn-default">
+                    <button id="navbar-button" type="button" className="btn btn-default"
+                            onClick={this.toggleNavbar}
+                            ref={(navbarBtn) => { this.navbarBtn = navbarBtn; }}>
                         <span className="glyphicon glyphicon-menu-hamburger"></span>
                     </button>
                 </div>
