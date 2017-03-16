@@ -85,8 +85,7 @@ class StickyNavbar extends React.Component {
 
             <nav id="navbar" ref={(navbar) => { this.navbar = navbar; }}>
                 <div className="container-fluid">
-                    <a className="navbar-brand">
-                    </a>
+                    <a className="navbar-brand"></a>
 
                     <ul>{this.list(this.props.headings)}</ul>
 
