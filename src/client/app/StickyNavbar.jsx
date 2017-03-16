@@ -70,21 +70,24 @@ class StickyNavbar extends React.Component {
 
         var navbarButton = this.navbarBtn;
 
-        if(this.navbar.hasClass('expanded')) {
-            element.removeClass('expanded');
-            element.css('height', String(collapsedNavbarHeight) + 'px');
+        if(this.navbar.classList.contains('expanded')) {
+
+            this.navbar.className.remove('expanded');
+            this.navbar.style.height = String(collapsedNavbarHeight) + 'px';
 
             checkNavbarLowerEdge();
 
-            navbarButton.removeClass('active');
+            navbarButton.classList.remove('active');
+
         } else {
-            element.addClass('expanded');
+
+            this.navbar.classList.add('expanded');
             expandedNavbarHeight = $(element).children('.container-fluid').height();
-            element.css('height', String(expandedNavbarHeight) + 'px');
+            this.navbar.style.height = String(expandedNavbarHeight) + 'px';
 
             checkNavbarUpperEdge();
 
-            navbarButton.addClass('active');
+            navbarButton.classList.add('active');
         }
     }
 
