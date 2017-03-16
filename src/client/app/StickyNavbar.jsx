@@ -8,10 +8,7 @@ class StickyNavbar extends React.Component {
         this.expanded = false;
         this.fixatedAtElement = true;
 
-        this.getNavbar = this.getNavbar.bind(this);
         this.navbarPositionListener = this.navbarPositionListener.bind(this);
-        //this.fixateElementPositionTop = this.fixateElementPositionTop().bind(this);
-        //this.fixateElementPositionBottom = this.fixateElementPositionBottom.bind(this);
 
     }
 
@@ -21,10 +18,6 @@ class StickyNavbar extends React.Component {
 
     componentWillUnmount() {
         window.removeEvent('scroll', this.navbarPositionListener);
-    }
-
-    getNavbar() {
-        return this.navbar;
     }
 
     offsetTop(element) {
@@ -38,7 +31,7 @@ class StickyNavbar extends React.Component {
 
     navbarPositionListener() {
 
-        let navbar = this.getNavbar();
+        let navbar = this.navbar;
         let elementToStickToY = this.offsetTop(this.props.elementToStickTo());
         let topOfWindowAlignsWithTopOfNavbar = window.scrollY > (elementToStickToY - navbar.clientHeight);
 
@@ -72,18 +65,18 @@ class StickyNavbar extends React.Component {
 
     }
 
-    getHeadings() {
-
-        return this.props.headings.map((heading, index) =>
-            <li key={index}>{heading}</li>
+    map(element, list) {
+        return list.map((item, index) =>
+            React.createElement(
+                element,
+                {key: index},
+                item
+            )
         );
     }
 
-    getSocialMedia() {
-
-        return this.props.socialMedia.map((socialMediaItem, index) =>
-            <li key={index}>{socialMediaItem}</li>
-        );
+    list(list) {
+        return this.map('li', list);
     }
 
     render() {
@@ -95,10 +88,12 @@ class StickyNavbar extends React.Component {
                     <a className="navbar-brand">
                     </a>
 
-                    <ul>{this.getHeadings()}</ul>
+                    <ul>{this.list(this.props.headings)}</ul>
 
-                    <div id="social-media-section">{this.getSocialMedia()}</div>
-                    <button id="navbar-button" type="button" className="btn btn-default"><span className="glyphicon glyphicon-menu-hamburger"></span></button>
+                    <div id="social-media-section">{this.list(this.props.socialMedia)}</div>
+                    <button id="navbar-button" type="button" className="btn btn-default">
+                        <span className="glyphicon glyphicon-menu-hamburger"></span>
+                    </button>
                 </div>
             </nav>
 
