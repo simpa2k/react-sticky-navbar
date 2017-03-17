@@ -11,6 +11,7 @@ class StickyNavbar extends React.Component {
         this.expanded = false;
         this.fixatedAtElement = true;
 
+        this.resizeListener = this.resizeListener.bind(this);
         this.navbarPositionListener = this.navbarPositionListener.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
 
@@ -18,7 +19,9 @@ class StickyNavbar extends React.Component {
 
     componentDidMount() {
 
+        window.addEventListener('resize', this.resizeListener);
         window.addEventListener('scroll', this.navbarPositionListener);
+
         this.collapsedNavbarHeight = this.navbar.clientHeight;
         this.expandedNavbarHeight = this.container.clientHeight;
 
@@ -28,12 +31,25 @@ class StickyNavbar extends React.Component {
         window.removeEvent('scroll', this.navbarPositionListener);
     }
 
+    resizeListener() {
+
+        this.setNavbarHeight();
+        this.checkNavbarUpperEdge();
+        this.checkNavbarLowerEdge();
+
+        if (window.width >= 931 && this.navbar.classList.contains('expanded')) {
+            this.toggleNavbar();
+        }
+
+
+    }
+
     navbarPositionListener() {
 
         let navbar = this.navbar;
         let topOfWindowAlignsWithTopOfNavbar = window.scrollY > (this.props.elementToStickToY - navbar.clientHeight);
 
-        if(topOfWindowAlignsWithTopOfNavbar) {
+        if (topOfWindowAlignsWithTopOfNavbar) {
             this.fixateElementPositionTop(navbar, navbar.clientHeight);
         } else {
             this.fixateElementPositionBottom(navbar, this.props.elementToStickToY);
@@ -71,15 +87,15 @@ class StickyNavbar extends React.Component {
 
         let correctHeight = this.container.clientHeight;
 
-        if(this.navbar.hasClass('expanded')) {
+        if (this.navbar.classList.contains('expanded')) {
 
             this.expandedNavbarHeight = correctHeight;
-            this.navbar.style.height = String(this.expandedNavbarHeight);
+            this.navbar.style.height = String(this.expandedNavbarHeight) + 'px';
 
         } else {
 
             this.collapsedNavbarHeight = correctHeight;
-            this.navbar.style.height = String(this.collapsedNavbarHeight);
+            this.navbar.style.height = String(this.collapsedNavbarHeight) + 'px';
 
         }
     }
@@ -94,7 +110,7 @@ class StickyNavbar extends React.Component {
 
         let navbarY = offsetTop(this.navbar);
 
-        if(navbarY < window.scrollY) {
+        if (navbarY < window.scrollY) {
             window.scrollTo(0, navbarY);
         }
     }
@@ -108,7 +124,7 @@ class StickyNavbar extends React.Component {
 
         let elementBottom = offsetTop(this.navbar) + this.navbar.clientHeight;
 
-        if(elementBottom < this.props.elementToStickToY) {
+        if (elementBottom < this.props.elementToStickToY) {
             this.fixateElementPositionBottom(this.navbar, this.props.elementToStickToY);
         }
     }
@@ -123,7 +139,7 @@ class StickyNavbar extends React.Component {
 
         var navbarButton = this.navbarBtn;
 
-        if(this.navbar.classList.contains('expanded')) {
+        if (this.navbar.classList.contains('expanded')) {
 
             this.navbar.classList.remove('expanded');
             this.navbar.style.height = String(this.collapsedNavbarHeight) + 'px';
