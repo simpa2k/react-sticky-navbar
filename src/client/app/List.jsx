@@ -15,7 +15,7 @@ class List extends React.Component {
     render() {
 
         return (
-            <ul>{this.map()}</ul>
+            <ul className={this.props.classes} >{this.map()}</ul>
         )
     }
 }

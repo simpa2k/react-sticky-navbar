@@ -28,9 +28,18 @@ class StickyNavbar extends React.Component {
     }
 
     componentWillUnmount() {
+
         window.removeEvent('scroll', this.navbarPositionListener);
+        window.removeEvent('resize', this.resizeListener);
+
     }
 
+    /*
+     * If the navbar height is not constantly checked on resize
+     * the .container-fluid might get bigger than the navbar, resulting in ugliness.
+     * The position of the navbar might also change if it gets smaller, resulting in it
+     * being placed above the element that it should stick to.
+     */
     resizeListener() {
 
         this.setNavbarHeight();
@@ -129,12 +138,6 @@ class StickyNavbar extends React.Component {
         }
     }
 
-    /*
-     * If the navbar height is not constantly checked on resize
-     * the .container-fluid might get bigger than the navbar, resulting in ugliness.
-     * The position of the navbar might also change if it gets smaller, resulting in it
-     * being placed above the element that it should stick to.
-     */
     toggleNavbar() {
 
         var navbarButton = this.navbarBtn;
@@ -165,14 +168,15 @@ class StickyNavbar extends React.Component {
         return (
 
             <nav id="navbar" ref={(navbar) => { this.navbar = navbar; }}>
-                <div className="container-fluid" ref={(container) => { this.container = container; }}>
+                <div className="container-fluid parent" ref={(container) => { this.container = container; }}>
                     <a className="navbar-brand"></a>
 
-                    <List items={this.props.headings} />
+                    <List classes={'child'} items={this.props.headings} />
 
                     <div id="social-media-section">
                         <List items={this.props.socialMedia} />
                     </div>
+
                     <button id="navbar-button" type="button" className="btn btn-default"
                             onClick={this.toggleNavbar}
                             ref={(navbarBtn) => { this.navbarBtn = navbarBtn; }}>
