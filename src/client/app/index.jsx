@@ -55,7 +55,7 @@ class App extends React.Component {
                 src: '../../images/socialmedia/sc29.png',
                 destination: 'http://www.soundcloud.com'
             }
-        ]
+        ];
     }
 
     render() {
