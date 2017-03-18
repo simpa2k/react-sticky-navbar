@@ -6,16 +6,21 @@ class List extends React.Component {
         super(props);
     }
 
-    map() {
+    createElement(element, classes) {
+        return element;
+    }
+
+    map(classes) {
+
         return this.props.items.map((element, index) =>
-            <li key={index}>{element}</li>
+            <li key={index}>{this.createElement(element, classes)}</li>
         );
     }
 
     render() {
 
         return (
-            <ul className={this.props.classes} >{this.map()}</ul>
+            <ul>{this.map(this.props.classes)}</ul>
         )
     }
 }

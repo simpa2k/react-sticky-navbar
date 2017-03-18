@@ -1,7 +1,8 @@
 import React from 'react';
-import List from './List.jsx';
+import HeadingList from './List/HeadingList.jsx';
+import SocialMediaList from './List/SocialMediaList.jsx';
 
-import offsetTop from './offsetTop.js';
+import offsetTop from './functions/offsetTop.js';
 
 class StickyNavbar extends React.Component {
 
@@ -49,14 +50,12 @@ class StickyNavbar extends React.Component {
         if (window.width >= 931 && this.navbar.classList.contains('expanded')) {
             this.toggleNavbar();
         }
-
-
     }
 
     navbarPositionListener() {
 
-        let navbar = this.navbar;
-        let topOfWindowAlignsWithTopOfNavbar = window.scrollY > (this.props.elementToStickToY - navbar.clientHeight);
+        const navbar = this.navbar;
+        const topOfWindowAlignsWithTopOfNavbar = window.scrollY > (this.props.elementToStickToY - navbar.clientHeight);
 
         if (topOfWindowAlignsWithTopOfNavbar) {
             this.fixateElementPositionTop(navbar, navbar.clientHeight);
@@ -94,7 +93,7 @@ class StickyNavbar extends React.Component {
      */
     setNavbarHeight() {
 
-        let correctHeight = this.container.clientHeight;
+        const correctHeight = this.container.clientHeight;
 
         if (this.navbar.classList.contains('expanded')) {
 
@@ -114,10 +113,9 @@ class StickyNavbar extends React.Component {
      * is off screen, the window has to be scrolled up to account
      * for this.
      */
-
     checkNavbarUpperEdge() {
 
-        let navbarY = offsetTop(this.navbar);
+        const navbarY = offsetTop(this.navbar);
 
         if (navbarY < window.scrollY) {
             window.scrollTo(0, navbarY);
@@ -131,7 +129,7 @@ class StickyNavbar extends React.Component {
      */
     checkNavbarLowerEdge() {
 
-        let elementBottom = offsetTop(this.navbar) + this.navbar.clientHeight;
+        const elementBottom = offsetTop(this.navbar) + this.navbar.clientHeight;
 
         if (elementBottom < this.props.elementToStickToY) {
             this.fixateElementPositionBottom(this.navbar, this.props.elementToStickToY);
@@ -140,7 +138,7 @@ class StickyNavbar extends React.Component {
 
     toggleNavbar() {
 
-        var navbarButton = this.navbarBtn;
+        const navbarButton = this.navbarBtn;
 
         if (this.navbar.classList.contains('expanded')) {
 
@@ -171,10 +169,10 @@ class StickyNavbar extends React.Component {
                 <div className="container-fluid parent" ref={(container) => { this.container = container; }}>
                     <a className="navbar-brand"></a>
 
-                    <List classes={'child'} items={this.props.headings} />
+                    <HeadingList classes={'navbar-text'} items={this.props.headings} />
 
                     <div id="social-media-section">
-                        <List items={this.props.socialMedia} />
+                        <SocialMediaList classes={'social-media'} items={this.props.socialMedia} />
                     </div>
 
                     <button id="navbar-button" type="button" className="btn btn-default"
