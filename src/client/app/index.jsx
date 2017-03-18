@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import StickyNavbar from './StickyNavbar/StickyNavbar.jsx';
 
-import offsetTop from './StickyNavbar/functions/offsetTop';
+import offset from './StickyNavbar/functions/offset';
 
 class App extends React.Component {
 
@@ -30,7 +30,7 @@ class App extends React.Component {
     }
 
     setMainDivY() {
-        this.setState({mainDivY: offsetTop(this.mainDiv)});
+        this.setState({mainDivY: offset(this.mainDiv).top});
     }
 
     findLinks() {
@@ -38,22 +38,24 @@ class App extends React.Component {
         this.headings = [
             {
                 name: 'KONSERTER',
-                destination: offsetTop(this.gigsSection)
+                destination: offset(this.gigsSection).top
             },
             {
                 name: 'NYHETER',
-                destination: offsetTop(this.newsSection)
+                destination: offset(this.newsSection).top
             }
         ];
 
         this.socialMedia = [
             {
                 src: '../../images/socialmedia/facebooklogga_29.png',
-                destination: 'http://www.facebook.com'
+                destination: 'http://www.facebook.com',
+                imageText: "../../images/socialmedia/facebooktext.png"
             },
             {
                 src: '../../images/socialmedia/sc29.png',
-                destination: 'http://www.soundcloud.com'
+                destination: 'http://www.soundcloud.com',
+                imageText: "../../images/socialmedia/soundcloudtext.png"
             }
         ];
     }

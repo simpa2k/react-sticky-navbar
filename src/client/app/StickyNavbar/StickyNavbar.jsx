@@ -1,8 +1,9 @@
 import React from 'react';
 import HeadingList from './List/HeadingList.jsx';
 import SocialMediaList from './List/SocialMediaList.jsx';
+import SocialMediaText from './SocialMediaText.jsx';
 
-import offsetTop from './functions/offsetTop.js';
+import offset from './functions/offset.js';
 
 class StickyNavbar extends React.Component {
 
@@ -12,9 +13,14 @@ class StickyNavbar extends React.Component {
         this.expanded = false;
         this.fixatedAtElement = true;
 
+        this.state = {};
+
         this.resizeListener = this.resizeListener.bind(this);
         this.navbarPositionListener = this.navbarPositionListener.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
+
+        this.appendSocialMediaText = this.appendSocialMediaText.bind(this);
+        this.removeSocialMediaText = this.removeSocialMediaText.bind(this);
 
     }
 
@@ -47,9 +53,11 @@ class StickyNavbar extends React.Component {
         this.checkNavbarUpperEdge();
         this.checkNavbarLowerEdge();
 
-        if (window.width >= 931 && this.navbar.classList.contains('expanded')) {
+        if (window.innerWidth >= 931 && this.navbar.classList.contains('expanded')) {
             this.toggleNavbar();
         }
+
+        this.setNavbarLowerEdgeY();
     }
 
     navbarPositionListener() {
@@ -63,11 +71,18 @@ class StickyNavbar extends React.Component {
             this.fixateElementPositionBottom(navbar, this.props.elementToStickToY);
         }
 
+        this.setNavbarLowerEdgeY();
+    }
+
+    setNavbarLowerEdgeY() {
+
+        const navbarOffset = offset(this.navbar).top;
+        this.setState({navbarLowerEdgeY: navbarOffset + this.navbar.clientHeight});
     }
 
     fixateElementPositionTop(navbar, navbarHeight) {
 
-        this.fixatedAtElement = false;
+        this.setState({fixatedAtElement: false});
 
         navbar.style.zIndex = '10';
         navbar.style.position = 'fixed';
@@ -78,7 +93,7 @@ class StickyNavbar extends React.Component {
 
     fixateElementPositionBottom(navbar, elementToStickToY) {
 
-        this.fixatedAtElement = true;
+        this.setState({fixatedAtElement: true});
 
         navbar.style.zIndex = '10';
         navbar.style.position = 'absolute';
@@ -115,7 +130,7 @@ class StickyNavbar extends React.Component {
      */
     checkNavbarUpperEdge() {
 
-        const navbarY = offsetTop(this.navbar);
+        const navbarY = offset(this.navbar).top;
 
         if (navbarY < window.scrollY) {
             window.scrollTo(0, navbarY);
@@ -129,7 +144,7 @@ class StickyNavbar extends React.Component {
      */
     checkNavbarLowerEdge() {
 
-        const elementBottom = offsetTop(this.navbar) + this.navbar.clientHeight;
+        const elementBottom = offset(this.navbar).top + this.navbar.clientHeight;
 
         if (elementBottom < this.props.elementToStickToY) {
             this.fixateElementPositionBottom(this.navbar, this.props.elementToStickToY);
@@ -161,27 +176,70 @@ class StickyNavbar extends React.Component {
         }
     }
 
+    appendSocialMediaText(event, textImagePath) {
+
+        const clickedElement = event.currentTarget;
+
+        const distance = this.state.fixatedAtElement ? -50 : 50;
+        const top = offset(clickedElement).top + distance;
+        const style = {
+            top: top,
+            left: offset(clickedElement).left
+         };
+        /*const style = {
+            position: 'absolute',
+            zIndex: '100',
+            width: '50px',
+            top: top,
+            left: offset(clickedElement).left
+        };*/
+
+        const imageTextElement = React.createElement(
+            'img',
+            {
+                className: 'social-media-text',
+                src: textImagePath,
+                style: style
+            }
+        );
+
+        this.setState({socialMediaText: imageTextElement});
+
+    }
+
+    removeSocialMediaText() {
+        this.setState({ socialMediaText: null });
+    }
+
     render() {
 
         return (
 
-            <nav id="navbar" ref={(navbar) => { this.navbar = navbar; }}>
-                <div className="container-fluid parent" ref={(container) => { this.container = container; }}>
-                    <a className="navbar-brand"></a>
+            <div>
+                <nav id="navbar" ref={(navbar) => { this.navbar = navbar; }}>
+                    <div className="container-fluid parent" ref={(container) => { this.container = container; }}>
+                        <a className="navbar-brand"></a>
 
-                    <HeadingList classes={'navbar-text'} items={this.props.headings} />
+                        <HeadingList classes={'navbar-text'} items={this.props.headings} />
 
-                    <div id="social-media-section">
-                        <SocialMediaList classes={'social-media'} items={this.props.socialMedia} />
+                        <div id="social-media-section">
+                            <SocialMediaList
+                                classes={'social-media'}
+                                items={this.props.socialMedia}
+                                mouseOver={this.appendSocialMediaText}
+                                mouseOut={this.removeSocialMediaText}
+                            />
+                        </div>
+
+                        <button id="navbar-button" type="button" className="btn btn-default"
+                                onClick={this.toggleNavbar}
+                                ref={(navbarBtn) => { this.navbarBtn = navbarBtn; }}>
+                            <span className="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
                     </div>
-
-                    <button id="navbar-button" type="button" className="btn btn-default"
-                            onClick={this.toggleNavbar}
-                            ref={(navbarBtn) => { this.navbarBtn = navbarBtn; }}>
-                        <span className="glyphicon glyphicon-menu-hamburger"></span>
-                    </button>
-                </div>
-            </nav>
+                </nav>
+                <SocialMediaText text={this.state.socialMediaText} />
+            </div>
 
         );
     }

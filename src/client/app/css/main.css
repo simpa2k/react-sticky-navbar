@@ -6911,6 +6911,29 @@ button.close {
     display: none;
   }
 }
+.social-media-text {
+  position: absolute;
+  z-index: 100;
+  width: 50px;
+}
+.sm-enter {
+  opacity: 0.01;
+  width: 0px;
+}
+.sm-enter.sm-enter-active {
+  opacity: 1;
+  width: 50px;
+  transition: 200ms;
+}
+.sm-leave {
+  opacity: 1;
+  width: 50px;
+}
+.sm-leave {
+  opacity: 0.01;
+  width: 0px;
+  transition: 200ms;
+}
 .navbar {
   margin-bottom: 0 !important;
   border-top-left-radius: 0 !important;
@@ -7045,6 +7068,7 @@ body {
   z-index: 1;
   background-color: #dfdbc3;
   width: 100%;
+  height: 200vh;
 }
 #main .section {
   position: relative;
