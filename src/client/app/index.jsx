@@ -66,7 +66,11 @@ class App extends React.Component {
 
             <div>
                 <div id="background"></div>
-                <StickyNavbar headings={this.headings} socialMedia={this.socialMedia} elementToStickToY={this.state.mainDivY}/>
+
+                <StickyNavbar headings={this.headings}
+                              socialMedia={this.socialMedia}
+                              elementToStickToY={this.state.mainDivY}/>
+
                 <div id="main" ref={(mainDiv) => { this.mainDiv = mainDiv; }}>
 
                     <div className="section" ref={(gigsSection) => { this.gigsSection = gigsSection; }}>

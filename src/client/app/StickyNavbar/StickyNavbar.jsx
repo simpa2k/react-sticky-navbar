@@ -201,7 +201,7 @@ class StickyNavbar extends React.Component {
     }
 
     removeSocialMediaText() {
-        this.setState({ socialMediaText: null });
+        this.setState({socialMediaText: null});
     }
 
     render() {
