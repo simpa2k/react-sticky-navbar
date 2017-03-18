@@ -186,13 +186,6 @@ class StickyNavbar extends React.Component {
             top: top,
             left: offset(clickedElement).left
          };
-        /*const style = {
-            position: 'absolute',
-            zIndex: '100',
-            width: '50px',
-            top: top,
-            left: offset(clickedElement).left
-        };*/
 
         const imageTextElement = React.createElement(
             'img',
