@@ -18,6 +18,7 @@ class StickyNavbar extends React.Component {
         this.resizeListener = this.resizeListener.bind(this);
         this.navbarPositionListener = this.navbarPositionListener.bind(this);
         this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.setNavbarHeight = this.setNavbarHeight.bind(this);
 
         this.appendSocialMediaText = this.appendSocialMediaText.bind(this);
         this.removeSocialMediaText = this.removeSocialMediaText.bind(this);
@@ -26,12 +27,18 @@ class StickyNavbar extends React.Component {
 
     componentDidMount() {
 
-        window.addEventListener('resize', this.resizeListener);
-        window.addEventListener('scroll', this.navbarPositionListener);
+        if (this.props.elementToStickToY == 0) {
 
-        this.collapsedNavbarHeight = this.navbar.clientHeight;
-        this.expandedNavbarHeight = this.container.clientHeight;
+            this.navbar.style.position = 'static';
+            window.addEventListener('resize', this.setNavbarHeight);
 
+        } else {
+            window.addEventListener('resize', this.resizeListener);
+            window.addEventListener('scroll', this.navbarPositionListener);
+
+            this.collapsedNavbarHeight = this.navbar.clientHeight;
+            this.expandedNavbarHeight = this.container.clientHeight;
+        }
     }
 
     componentWillUnmount() {

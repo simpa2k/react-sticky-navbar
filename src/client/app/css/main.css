@@ -6929,7 +6929,7 @@ button.close {
   opacity: 1;
   width: 50px;
 }
-.sm-leave {
+.sm-leave.sm-leave-active {
   opacity: 0.01;
   width: 0px;
   transition: 200ms;
@@ -6954,6 +6954,73 @@ button.close {
 .navbar .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+#gigs {
+  height: 100vh;
+  overflow-y: auto;
+  color: #123848;
+}
+#gigs .large-section-heading {
+  text-shadow: #afab93 2px 2px 2px;
+}
+#gigs #gigs-container {
+  overflow-y: auto;
+  padding-bottom: 2%;
+}
+#gigs .gig {
+  margin: 2% 2% 0 0%;
+  width: 90%;
+  max-height: 500px;
+  font-size: 16pt;
+  border: 1px solid #d0d7da;
+  border-radius: 2px;
+  -webkit-box-shadow: 2px 2px 3px 0px #c3bfa7;
+  -moz-box-shadow: 2px 2px 3px 0px #c3bfa7;
+  box-shadow: 2px 2px 3px 0px #c3bfa7;
+}
+#gigs .gig .gig-text {
+  border-right: 1px solid #d0d7da;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  padding: 2% 2% 1% 2%;
+}
+#gigs .gig .gig-button {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  padding: 2% 2% 1% 2%;
+  text-align: center;
+}
+#gigs .additional-info {
+  border-top: 1px solid #d0d7da;
+  cursor: default;
+  overflow-x: auto;
+}
+#gigs .additional-info a {
+  text-decoration: none;
+  color: #fa9663;
+}
+#gigs .collapsed .gig-button:after {
+  content: 'Mer info';
+}
+#gigs .collapsed .additional-info {
+  padding: 0 2% 0 2%;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#gigs .expanded .gig-button:after {
+  content: 'Mindre info';
+}
+#gigs .expanded .additional-info {
+  padding: 2% 2% 1% 2%;
+  max-height: 500px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 body {
   font-family: "Oswald" !important;
