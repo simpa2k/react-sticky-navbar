@@ -1,5 +1,4 @@
 import React from 'react';
-import Gig from '../views/gig/Gig.jsx';
 
 class AdminPage extends React.Component {
 
@@ -32,6 +31,7 @@ class AdminPage extends React.Component {
         const value = event.target.value;
 
         this.setState(() => this.state.model[field] = value);
+
     }
 
     updateData(data) {
@@ -40,13 +40,13 @@ class AdminPage extends React.Component {
 
     mapData() {
 
-        //<gig key={index} model={item} />
         return this.state.data.map((item, index) =>
             React.createElement(
                 this.props.itemView,
                 {key: index, model: item}
             )
         );
+
     }
 
     mapFormInputs() {

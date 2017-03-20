@@ -22,7 +22,7 @@ import Member from './views/member/Member.jsx';
 ReactDOM.render((
     <Router history={createBrowserHistory()}>
         <App>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Home}/>
             <Admin>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/gigs" component={function() {
