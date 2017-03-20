@@ -43,7 +43,7 @@ class AdminPage extends React.Component {
         return this.state.data.map((item, index) =>
             React.createElement(
                 this.props.itemView,
-                {key: index, model: item}
+                {key: index, model: item, click: this.props.itemClick}
             )
         );
 
@@ -64,9 +64,11 @@ class AdminPage extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="admin-page">
                 <div className="col-sm-4">
-                    <div>{this.mapData()}</div>
+                    <div className="selectable-container">
+                        <div>{this.mapData()}</div>
+                    </div>
                 </div>
                 <div className="col-sm-8">
                     <div className="col-sm-6 col-sm-offset-3">

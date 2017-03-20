@@ -19,6 +19,8 @@ import memberModel from './models/memberModel.js';
 import MembersController from './controllers/MembersController.jsx';
 import Member from './views/member/Member.jsx';
 
+const gigsController = new GigsController();
+
 ReactDOM.render((
     <Router history={createBrowserHistory()}>
         <App>
@@ -27,7 +29,7 @@ ReactDOM.render((
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/gigs" component={function() {
                     return (
-                        <AdminPage itemView={Gig} model={gigModel} getData={new GigsController().getGigs}/>
+                        <AdminPage itemView={Gig} itemClick={gigsController.gigClick} model={gigModel} getData={gigsController.getGigs}/>
                     );
                 }}/>
                 <Route path="/members" component={function() {

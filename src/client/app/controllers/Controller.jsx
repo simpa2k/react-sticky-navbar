@@ -5,14 +5,16 @@ class Controller extends React.Component {
     constructor() {
 
         super();
-        this.getPromise = this.getPromise.bind(this);
+        this.getData = this.getData.bind(this);
 
     }
 
-    getPromise(resource) {
+    getData(resource, callback) {
 
         return fetch(resource).then(function(response) {
             return response.json();
+        }).then(function(json) {
+            callback(json);
         });
     }
 }

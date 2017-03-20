@@ -11,10 +11,7 @@ class MembersController extends Controller {
     }
 
     getMembers(callback) {
-
-        this.getPromise('backend/server.php/members').then(function(json) {
-            callback(json);
-        });
+        this.getData('backend/server.php/members', callback)
     }
 }
 

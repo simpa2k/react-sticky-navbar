@@ -11,10 +11,7 @@ class GigsController extends Controller {
     }
 
     getGigs(callback) {
-
-        this.getPromise('backend/server.php/gigs').then(function(json) {
-            callback(json);
-        });
+        this.getData('backend/server.php/gigs', callback);
     }
 
     gigClick(gig) {

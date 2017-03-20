@@ -12,9 +12,6 @@ class Admin extends React.Component {
 
     }
 
-    componentDidMount() {
-    }
-
     findLinks() {
 
         this.headings = [

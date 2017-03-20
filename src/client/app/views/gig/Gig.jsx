@@ -45,7 +45,7 @@ class Gig extends React.Component {
 
     render() {
         return (
-            <div className="gig selectable collapsed row" onClick={this.props.click}>
+            <div className="gig selectable collapsed row" onClick={(event) => this.props.click(event.currentTarget)}>
                 <div className="col-xs-12">
                     <div className="row">
                         <div className="gig-text col-xs-9">
