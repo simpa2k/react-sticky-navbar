@@ -1,6 +1,6 @@
 import React from 'react';
 import GigsController from '../controllers/GigsController.jsx';
-import Gigs from '../views/Gig/Gigs.jsx';
+import Gigs from '../views/gig/Gigs.jsx';
 
 import offset from '../StickyNavbar/functions/offset';
 

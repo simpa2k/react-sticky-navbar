@@ -18,8 +18,7 @@ var config = {
                 loader: 'babel-loader'
             }
         ]
-    },
-    historyApiFallback: true
+    }
 };
 
 module.exports = config;

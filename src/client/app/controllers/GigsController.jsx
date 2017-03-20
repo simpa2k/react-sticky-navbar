@@ -1,7 +1,14 @@
-import React from 'react';
+//import React from 'react';
 import Controller from './Controller.jsx';
 
 class GigsController extends Controller {
+
+    constructor() {
+
+        super();
+        this.getGigs = this.getGigs.bind(this);
+
+    }
 
     getGigs(callback) {
 
